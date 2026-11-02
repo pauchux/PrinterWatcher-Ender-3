@@ -1,0 +1,10 @@
+# Runtime dependencies for discord_controller.py (Raspberry Pi 4B, Python 3.11+)
+# Picamera2 is NOT installed from pip: use `sudo apt install python3-picamera2`
+# and create the venv with --system-site-packages (setup.sh does this).
+discord.py>=2.4,<3
+aiohttp>=3.9
+python-dotenv>=1.0
+numpy>=1.24
+opencv-python-headless>=4.8
+# Lightweight TFLite runtime (fallbacks: tflite-runtime, then full tensorflow)
+ai-edge-litert>=1.0

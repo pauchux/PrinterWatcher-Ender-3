@@ -1,0 +1,7 @@
+.env
+venv/
+.venv/
+__pycache__/
+bot_state.json
+bot_state.tmp
+false_positives/

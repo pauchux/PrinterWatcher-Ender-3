@@ -1,0 +1,30 @@
+[Unit]
+Description=PrinterWatcher Ender 3 - TinyML AI Discord bot for Klipper
+Documentation=file://__WORKDIR__/README.md
+After=network-online.target moonraker.service crowsnest.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=__USER__
+Group=__USER__
+SupplementaryGroups=video
+WorkingDirectory=__WORKDIR__
+ExecStart=__PYTHON__ __WORKDIR__/discord_controller.py
+Restart=on-failure
+RestartSec=15
+TimeoutStopSec=20
+
+Environment=PYTHONUNBUFFERED=1
+# Fewer glibc malloc arenas -> noticeably lower RSS for threaded Python on ARM
+Environment=MALLOC_ARENA_MAX=2
+
+# Klipper always wins: lower CPU/IO priority and hard memory ceiling for the bot
+Nice=10
+CPUWeight=50
+IOSchedulingClass=idle
+MemoryHigh=450M
+MemoryMax=700M
+
+[Install]
+WantedBy=multi-user.target
